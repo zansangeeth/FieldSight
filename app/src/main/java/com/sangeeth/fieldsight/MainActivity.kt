@@ -23,9 +23,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FieldSightTheme {
-                MyApp{
+                MyApp{ investigation ->
                     startActivity(Intent(this, InvestigationDetailActivity::class.java).apply {
-                        putExtra("investigation", Gson().toJson(it))
+                        putExtra("investigation", Gson().toJson(investigation))
                     })
                 }
             }
