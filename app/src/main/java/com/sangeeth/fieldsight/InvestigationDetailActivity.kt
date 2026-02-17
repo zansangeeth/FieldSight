@@ -3,6 +3,9 @@ package com.sangeeth.fieldsight
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
+import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -18,7 +21,10 @@ class InvestigationDetailActivity : AppCompatActivity() {
                     composable("investigation_detail") {
                         TopBarNavigationOnBack(
                             navigationBack = { finish() },
-                            topBarTitle = "Investigation Detail"
+                            topBarTitle = "Investigation Detail",
+                            content = { innerPadding ->
+                                Text("Investigation Detail Screen new", modifier = Modifier.padding(innerPadding))
+                            }
                         )
                     }
                 }
