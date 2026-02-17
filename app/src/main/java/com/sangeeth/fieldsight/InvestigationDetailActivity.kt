@@ -23,7 +23,8 @@ class InvestigationDetailActivity : AppCompatActivity() {
                             navigationBack = { finish() },
                             topBarTitle = "Investigation Detail",
                             content = { innerPadding ->
-                                Text("Investigation Detail Screen new", modifier = Modifier.padding(innerPadding))
+                                val investigation = intent.getStringExtra("investigation")
+                                Text("Investigation Detail Screen new, $investigation", modifier = Modifier.padding(innerPadding))
                             }
                         )
                     }

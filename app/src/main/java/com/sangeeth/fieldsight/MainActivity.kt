@@ -14,6 +14,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.google.gson.Gson
 import com.sangeeth.fieldsight.ui.theme.FieldSightTheme
 
 class MainActivity : ComponentActivity() {
@@ -23,7 +24,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             FieldSightTheme {
                 MyApp{
-                    startActivity(Intent(this, InvestigationDetailActivity::class.java))
+                    startActivity(Intent(this, InvestigationDetailActivity::class.java).apply {
+                        putExtra("investigation", Gson().toJson(it))
+                    })
                 }
             }
         }
