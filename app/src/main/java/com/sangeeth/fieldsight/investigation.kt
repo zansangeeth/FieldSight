@@ -7,5 +7,8 @@ data class investigation(
     val priority: Priority,
     var status: Status,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    var assignedBy: String,
+    var attachments: List<String>,
+    var notes: List<String>,
 )

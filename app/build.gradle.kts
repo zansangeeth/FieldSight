@@ -64,4 +64,6 @@ dependencies {
 
     implementation("com.mapbox.maps:android-ndk27:11.18.2")
     implementation("com.mapbox.extension:maps-compose-ndk27:11.18.2")
+    implementation("com.mapbox.search:mapbox-search-android-ndk27:2.14.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.10.2")
 }

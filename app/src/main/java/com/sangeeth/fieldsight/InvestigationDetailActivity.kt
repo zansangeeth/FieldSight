@@ -6,21 +6,19 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.BottomSheetScaffold
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mapbox.geojson.Point
-import com.mapbox.maps.extension.compose.MapboxMap
-import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportState
-import com.mapbox.maps.extension.compose.annotation.Marker
-import com.mapbox.maps.extension.compose.style.standard.MapboxStandardStyle
 import com.sangeeth.fieldsight.ui.theme.FieldSightTheme
 import org.json.JSONObject
 
 class InvestigationDetailActivity : AppCompatActivity() {
+ @OptIn(ExperimentalMaterial3Api::class)
  override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -36,27 +34,37 @@ class InvestigationDetailActivity : AppCompatActivity() {
                                 val jsonObject = JSONObject(investigation)
                                 Log.i("Investigation Detail Screen", jsonObject.toString())
                                 val investigationId = jsonObject.getInt("id")
-                                val investigationlat = jsonObject.getInt("latitude")
-                                val investigationLong = jsonObject.getInt("longitude")
+                                val investigationlat = jsonObject.getDouble("latitude")
+                                val investigationLong = jsonObject.getDouble("longitude")
+                                val investigationPoint = listOf(investigationlat, investigationLong)
                                 Text("Investigation Detail Screen new, $investigationId", modifier = Modifier.padding(innerPadding))
 
+                                val scaffoldState = rememberBottomSheetScaffoldState()
 
-                                MapboxMap(
-                                    Modifier.fillMaxSize(),
-                                    mapViewportState = rememberMapViewportState {
-                                        setCameraOptions {
-                                            zoom(5.0)
-                                            center(Point.fromLngLat(investigationLong.toDouble(), investigationlat.toDouble()))
-                                            pitch(0.0)
-                                            bearing(0.0)
-                                        }
-                                    },
-                                ){
-                                    Marker(
-                                        point = Point.fromLngLat(investigationLong.toDouble(), investigationlat.toDouble()),
-                                        color = Color(255, 0, 0)
+                                BottomSheetScaffold(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                        .padding(innerPadding),
+                                    scaffoldState = scaffoldState,
+                                    sheetContent = {
+                                        InvestigationBottomSheet(
+                                            investigationDescription = jsonObject.getString("description"),
+                                            investigationAddress = investigationPoint,
+                                            dateAssigned = jsonObject.getString("dateAssigned"),
+                                            priority = jsonObject.getString("priority"),
+                                            status = jsonObject.getString("status"),
+                                            assignedBy = jsonObject.getString("assignedBy"),
+                                            attachments = jsonObject.getString("attachments"),
+                                            notes = jsonObject.getString("notes"),
+                                        )
+                                    }
+                                ) {
+                                    InvestigationMap(
+                                        investigationLat = investigationlat.toDouble(),
+                                        investigationLong = investigationLong.toDouble()
                                     )
                                 }
+
                             }
                         )
                     }
