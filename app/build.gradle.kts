@@ -61,4 +61,7 @@ dependencies {
     implementation(libs.maplibre.compose)
 
     implementation(libs.androidx.navigation.compose)
+
+    implementation("com.mapbox.maps:android-ndk27:11.18.2")
+    implementation("com.mapbox.extension:maps-compose-ndk27:11.18.2")
 }
