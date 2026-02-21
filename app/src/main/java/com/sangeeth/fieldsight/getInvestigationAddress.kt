@@ -1,5 +1,6 @@
 package com.sangeeth.fieldsight
 
+import android.util.Log
 import com.mapbox.geojson.Point
 import com.mapbox.search.ApiType
 import com.mapbox.search.ResponseInfo
@@ -11,15 +12,15 @@ import com.mapbox.search.result.SearchResult
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlin.coroutines.resume
 
-suspend fun reverseGeocode(latLng: List<Double>): String? =
+suspend fun getInvestigationAddress(latLng: List<Double>): String? =
     suspendCancellableCoroutine { continuation ->
 
         val latitude = latLng[0]
         val longitude = latLng[1]
 
         val searchEngine = SearchEngine.createSearchEngineWithBuiltInDataProviders(
-            ApiType.SEARCH_BOX,
-            SearchEngineSettings()
+            apiType = ApiType.GEOCODING,
+            settings = SearchEngineSettings()
         )
 
         val options = ReverseGeoOptions(

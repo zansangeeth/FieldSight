@@ -60,8 +60,8 @@ class InvestigationDetailActivity : AppCompatActivity() {
                                     }
                                 ) {
                                     InvestigationMap(
-                                        investigationLat = investigationlat.toDouble(),
-                                        investigationLong = investigationLong.toDouble()
+                                        investigationLat = investigationlat,
+                                        investigationLong = investigationLong
                                     )
                                 }
 
