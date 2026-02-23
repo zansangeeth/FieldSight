@@ -1,23 +1,16 @@
 package com.sangeeth.fieldsight
 
-import android.R.attr.onClick
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.text.input.TextFieldLineLimits
-import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
-import androidx.compose.material3.DropdownMenu
-import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -33,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.Dispatchers
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 @Composable
 fun InvestigationBottomSheet(
@@ -110,29 +104,18 @@ fun InvestigationBottomSheet(
         HorizontalDivider(thickness = 2.dp)
         Spacer(modifier = Modifier.height(3.dp))
         Text("Staus: $status")
-        var expanded by remember { mutableStateOf(false) }
-        DropdownMenu(
-            expanded = expanded,
-            onDismissRequest = { expanded = false },
-            modifier = Modifier.fillMaxSize()
-        ) {
-            DropdownMenuItem(
-                text = { Text("Option 1") },
-                onClick = { /* Do something... */ }
-            )
-            DropdownMenuItem(
-                text = { Text("Option 2") },
-                onClick = { /* Do something... */ }
-            )
-        }
+        InvestigationStatus(
+            statusList = listOf(
+                status.toString(),
+                "In Progress",
+                "Completed",
+                "Closed"
+            ),
+            onStatusSelected = {
+                Log.d("STATUS", it)
+            },
+            modifier = Modifier.padding(50.dp)
+        )
 
     }
-}
-
-@Composable
-fun priorityChips(priority: String){
-    SuggestionChip(
-        onClick = { Log.d("Suggestion chip", "hello world") },
-        label = { Text(priority) }
-    )
 }
