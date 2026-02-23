@@ -104,17 +104,17 @@ fun InvestigationBottomSheet(
         HorizontalDivider(thickness = 2.dp)
         Spacer(modifier = Modifier.height(3.dp))
         Text("Staus: $status")
-        InvestigationStatus(
-            statusList = listOf(
+        InvestigationStatusDropdown(
+            itemList = listOf(
                 status.toString(),
                 "In Progress",
                 "Completed",
                 "Closed"
             ),
-            onStatusSelected = {
-                Log.d("STATUS", it)
+            onItemClick = {
+                Log.d("STATUS", it.toString())
             },
-            modifier = Modifier.padding(50.dp)
+            modifier = Modifier.fillMaxWidth(),
         )
 
     }
