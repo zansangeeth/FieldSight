@@ -16,6 +16,9 @@
       <SelectionState runConfigName="InvestigationBottomSheetPreview">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="previewInvestigationStatus">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>
